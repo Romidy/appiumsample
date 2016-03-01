@@ -1,0 +1,28 @@
+language: android
+jdk: oraclejdk8
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-21 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-18 ANDROID_ABI=armeabi-v7a
+    - ANDROID_TARGET=android-16 ANDROID_ABI=armeabi-v7a
+
+android:
+  components:
+    - build-tools-22.0.1
+  licenses:
+    - android-sdk-license-[0-9a-f]{8}
+
+before_script:
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - adb wait-for-device
+  - adb shell input keyevent 82 &
+
+script:
+  - ./gradlew connectedAndroidTestAppDebug
+
+notifications:
+  slack:
+    secure: kLJM6ofuAxgZ2y8EY3VCWTfnpm7WtJ32EiYh8g+9D5RijQzHKIuIUM9ULvCMcGyjUHjzIlPHunLn3JrsiNttJMqnp5QHUqzGID9V6j61N2brKJvuWA4G0aXQqAmW2YxbJhPSOKe58MPtiNyJkGpnFbjNTvZDI8E4Y2SMidE0Kwc=

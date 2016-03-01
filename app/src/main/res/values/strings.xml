@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HelloTesting</string>
+    <string name="title_customer_detail">Customer Detail</string>
+    <string name="labelName">氏名</string>
+    <string name="labelEmail">メール</string>
+    <string name="labelGender">性別</string>
+    <string name="labelAge">年齢</string>
+    <string name="labelGenderMale">男性</string>
+    <string name="labelGenderFemale">女性</string>
+    <string name="descriptionName">name textfield</string>
+    <string name="descriptionEmail">mail textfield</string>
+    <string name="descriptionGender">gender segmentedcontrol</string>
+    <string name="descriptionAgePicker">age pickerview</string>
+    <string name="title_activity_customer_preview">CustomerPreviewActivity</string>
+
+</resources>

@@ -1,0 +1,57 @@
+apply plugin: 'android'
+apply plugin: 'android-aspectj'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    signingConfigs {
+        calabash {
+            storeFile file("../sample.keystore")
+            keyPassword "sample"
+            keyAlias "atmarkit"
+            storePassword "atmarkit"
+        }
+    }
+
+    productFlavors {
+        def calabashSigningVariable = signingConfigs.calabash
+        app {
+            applicationId "com.nowsprinting.hellotesting.app"
+        }
+        monkeytalk {
+            applicationId "com.nowsprinting.hellotesting.monkeytalk"
+        }
+        calabash {
+            applicationId "com.nowsprinting.hellotesting.calabash"
+            signingConfig calabashSigningVariable
+        }
+        appium {
+            applicationId "com.nowsprinting.hellotesting.appium"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:support-v4:21.+'
+    monkeytalkCompile fileTree(dir: 'libs-monkeytalk', include: ['*.jar'])
+}
